@@ -1,0 +1,18 @@
+vector<int> climbingLeaderboard(vector<int>& ranked, vector<int>& player) {
+    ranked.erase(unique(ranked.begin(), ranked.end()), ranked.end());
+    vector<int> result(player.size());
+    for (int pIndex = 0; pIndex < player.size(); pIndex++) {
+        bool flag = false;
+        for (int rankIndex = 0; rankIndex < ranked.size(); rankIndex++) {
+            if (flag) break;
+            if (player[pIndex] >= ranked[rankIndex]) {
+                flag = true;
+                result[pIndex] = rankIndex + 1;
+            }
+        }
+        if (!flag) {
+            result[pIndex] = ranked.size() + 1;
+        }
+    }
+    return result;
+}
